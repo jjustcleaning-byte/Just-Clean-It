@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Just Clean It, LLC — We Clean With Love</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --forest: #1A3D24;
+    --sage:   #2E6B42;
+    --mint:   #4CAF72;
+    --ink:    #0F1F14;
+    --mist:   #F2F7F3;
+    --rule:   #D4E4D8;
+    --white:  #ffffff;
+    --gray:   #6B7C6B;
+    --light:  #EEF5F0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    color: var(--ink);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ─────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 70px;
+    background: rgba(255,255,255,0.97);
+    border-bottom: 1px solid var(--rule);
+    backdrop-filter: blur(8px);
+  }
+
+  .nav-logo img {
+    height: 44px;
+    display: block;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray);
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--forest); }
+
+  .nav-cta {
+    background: var(--forest);
+    color: var(--white) !important;
+    padding: 9px 20px;
+    border-radius: 4px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--sage) !important; color: var(--white) !important; }
+
+  /* ── HERO ─────────────────────────────────────────── */
+  #home {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 70px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 6% 80px 8%;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: var(--mint);
+  }
+
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(42px, 5vw, 68px);
+    line-height: 1.08;
+    color: var(--forest);
+    margin-bottom: 28px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--sage);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--gray);
+    max-width: 420px;
+    margin-bottom: 44px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--forest);
+    color: var(--white);
+    padding: 14px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+
+  .btn-outline {
+    border: 1.5px solid var(--forest);
+    color: var(--forest);
+    padding: 14px 32px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { background: var(--forest); color: var(--white); transform: translateY(-1px); }
+
+  .hero-right {
+    background: var(--forest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: var(--sage);
+    opacity: 0.2;
+    top: -100px; right: -100px;
+  }
+
+  .hero-right::after {
+    content: '';
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: var(--mint);
+    opacity: 0.1;
+    bottom: -60px; left: -60px;
+  }
+
+  .hero-badge-wrap {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 40px;
+  }
+
+  .hero-badge-wrap img {
+    width: 260px;
+    filter: brightness(0) invert(1);
+    margin-bottom: 28px;
+  }
+
+  .hero-tagline {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.4;
+  }
+
+  .hero-tagline strong {
+    display: block;
+    font-style: normal;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 8px;
+  }
+
+  /* ── STATS STRIP ──────────────────────────────────── */
+  .stats-strip {
+    background: var(--light);
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .stat {
+    flex: 1;
+    max-width: 220px;
+    text-align: center;
+    padding: 36px 20px;
+    border-right: 1px solid var(--rule);
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--forest);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  /* ── SECTIONS SHARED ──────────────────────────────── */
+  section { padding: 96px 8%; }
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px; height: 2px;
+    background: var(--mint);
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(30px, 3.5vw, 46px);
+    line-height: 1.15;
+    color: var(--forest);
+    margin-bottom: 20px;
+  }
+
+  .section-sub {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--gray);
+    max-width: 540px;
+    margin-bottom: 52px;
+  }
+
+  /* ── ABOUT ────────────────────────────────────────── */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    background: var(--white);
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-card {
+    background: var(--forest);
+    border-radius: 8px;
+    padding: 48px 40px;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-card::after {
+    content: '"';
+    font-family: 'DM Serif Display', serif;
+    font-size: 180px;
+    color: rgba(255,255,255,0.06);
+    position: absolute;
+    top: -30px; right: 20px;
+    line-height: 1;
+  }
+
+  .about-quote {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 22px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-attr {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mint);
+  }
+
+  .about-accent {
+    width: 60px; height: 6px;
+    background: var(--mint);
+    border-radius: 3px;
+    margin: 28px 0;
+  }
+
+  .about-text {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--gray);
+    margin-bottom: 20px;
+  }
+
+  .values-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .values-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .values-list li::before {
+    content: '';
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--mint);
+    flex-shrink: 0;
+  }
+
+  /* ── SERVICES ─────────────────────────────────────── */
+  #services {
+    background: var(--mist);
+  }
+
+  .services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 52px;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .service-card {
+    background: var(--white);
+    border-radius: 6px;
+    padding: 36px 28px;
+    border: 1px solid var(--rule);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--mint);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(26,61,36,0.1);
+    border-color: var(--rule);
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-icon {
+    width: 44px; height: 44px;
+    background: var(--light);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+
+  .service-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--forest);
+    margin-bottom: 12px;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--gray);
+  }
+
+  /* ── CONTRACT OPPORTUNITIES ───────────────────────── */
+  #opportunities {
+    background: var(--white);
+  }
+
+  .opp-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 72px;
+    align-items: start;
+  }
+
+  .opp-info h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--forest);
+    margin-bottom: 10px;
+    margin-top: 28px;
+  }
+
+  .opp-info h3:first-child { margin-top: 0; }
+
+  .opp-info p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--gray);
+  }
+
+  .opp-info ul {
+    list-style: none;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .opp-info ul li {
+    font-size: 14px;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .opp-info ul li::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--mint);
+    flex-shrink: 0;
+  }
+
+  /* Form */
+  .opp-form-wrap {
+    background: var(--mist);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 44px 40px;
+  }
+
+  .form-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--forest);
+    margin-bottom: 6px;
+  }
+
+  .form-sub {
+    font-size: 13px;
+    color: var(--gray);
+    margin-bottom: 32px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--forest);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 11px 14px;
+    border: 1.5px solid var(--rule);
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--white);
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--sage);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 90px; }
+
+  .checkbox-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .checkbox-item input[type="checkbox"] {
+    width: 15px; height: 15px;
+    accent-color: var(--sage);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .form-group-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--forest);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .submit-btn {
+    width: 100%;
+    background: var(--forest);
+    color: var(--white);
+    border: none;
+    padding: 14px;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .submit-btn:hover { background: var(--sage); transform: translateY(-1px); }
+
+  .form-note {
+    font-size: 11px;
+    color: var(--gray);
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── CONTACT ──────────────────────────────────────── */
+  #contact {
+    background: var(--forest);
+    color: var(--white);
+  }
+
+  #contact .section-title { color: var(--white); }
+  #contact .section-sub { color: rgba(255,255,255,0.65); }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 72px;
+    align-items: start;
+  }
+
+  .contact-info-block {
+    margin-bottom: 32px;
+  }
+
+  .contact-info-block h4 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--mint);
+    margin-bottom: 8px;
+  }
+
+  .contact-info-block p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.7;
+  }
+
+  .contact-form-wrap {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 44px 40px;
+  }
+
+  .contact-form-wrap .form-group label { color: rgba(255,255,255,0.7); }
+
+  .contact-form-wrap input,
+  .contact-form-wrap select,
+  .contact-form-wrap textarea {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.15);
+    color: var(--white);
+  }
+
+  .contact-form-wrap input::placeholder,
+  .contact-form-wrap textarea::placeholder {
+    color: rgba(255,255,255,0.35);
+  }
+
+  .contact-form-wrap input:focus,
+  .contact-form-wrap textarea:focus {
+    border-color: var(--mint);
+  }
+
+  .contact-form-wrap .submit-btn {
+    background: var(--mint);
+    color: var(--forest);
+  }
+
+  .contact-form-wrap .submit-btn:hover { background: #3d9e60; color: var(--white); }
+
+  /* ── FOOTER ───────────────────────────────────────── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 28px 8%;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  footer span { color: var(--mint); }
+
+  /* ── SUCCESS MESSAGE ──────────────────────────────── */
+  .success-msg {
+    display: none;
+    background: var(--light);
+    border: 1px solid var(--mint);
+    border-radius: 4px;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--forest);
+    text-align: center;
+    margin-top: 16px;
+  }
+
+  /* ── ANIMATIONS ───────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow { animation: fadeUp 0.6s ease both; }
+  .hero-title   { animation: fadeUp 0.6s ease 0.1s both; }
+  .hero-sub     { animation: fadeUp 0.6s ease 0.2s both; }
+  .hero-actions { animation: fadeUp 0.6s ease 0.3s both; }
+
+  /* ── RESPONSIVE ───────────────────────────────────── */
+  @media (max-width: 900px) {
+    #home { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    #about { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr 1fr; }
+    .opp-layout, .contact-layout { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    section { padding: 64px 5%; }
+    .services-grid { grid-template-columns: 1fr; }
+    .opp-form-wrap, .contact-form-wrap { padding: 28px 20px; }
+    .checkbox-group { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#home">
+    <img src="logo.png" alt="Just Clean It LLC"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#opportunities">Opportunities</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+<!-- HOME / HERO -->
+<section id="home">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Commercial &amp; Residential Property Cleaning</div>
+    <h1 class="hero-title">
+      Commercial &amp; Residential<br/>
+      Cleaning <em>Done Right.</em>
+    </h1>
+    <p class="hero-sub">
+      Just Clean It, LLC delivers professional cleaning services across the Durham/RTP area — from trucking companies and manufacturing plants to behavioral health facilities, office spaces, and apartment community common areas.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Get a Quote</a>
+      <a href="#opportunities" class="btn-outline">Join Our Team</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-badge-wrap">
+      <img src="logo.png" alt="Just Clean It"/>
+      <div class="hero-tagline">
+        <strong>Est. 2003</strong>
+        "We Clean With Love"
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat">
+    <div class="stat-num">20+</div>
+    <div class="stat-label">Years in Business</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">1099</div>
+    <div class="stat-label">Contractor Model</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Satisfaction Focus</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">RTP</div>
+    <div class="stat-label">Durham Area</div>
+  </div>
+</div>
+
+<!-- SPECIALTY STRIP -->
+<div style="background:var(--forest);padding:48px 8%;">
+  <div style="margin-bottom:32px;">
+    <div style="font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--mint);margin-bottom:10px;font-weight:600;">What We Clean</div>
+    <div style="font-family:'DM Serif Display',serif;font-size:28px;line-height:1.2;color:white;">No Space Too Big. No Job Too Small.</div>
+    <div style="font-size:14px;color:rgba(255,255,255,0.6);margin-top:10px;max-width:600px;line-height:1.7;">From trucking yards to luxury apartment lobbies — if it needs to be clean, we handle it. We serve a wide range of industries with no limitations on scope.</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;">
+    <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:18px 20px;">
+      <div style="font-size:18px;margin-bottom:8px;">🏢</div>
+      <div style="color:white;font-weight:600;font-size:13px;margin-bottom:4px;">Commercial Offices</div>
+      <div style="color:rgba(255,255,255,0.5);font-size:12px;line-height:1.5;">General, corporate &amp; engineering firms</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:18px 20px;">
+      <div style="font-size:18px;margin-bottom:8px;">🏙️</div>
+      <div style="color:white;font-weight:600;font-size:13px;margin-bottom:4px;">Apartment Communities</div>
+      <div style="color:rgba(255,255,255,0.5);font-size:12px;line-height:1.5;">Common areas, lobbies &amp; amenity spaces</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:18px 20px;">
+      <div style="font-size:18px;margin-bottom:8px;">🏥</div>
+      <div style="color:white;font-weight:600;font-size:13px;margin-bottom:4px;">Healthcare &amp; Behavioral Health</div>
+      <div style="color:rgba(255,255,255,0.5);font-size:12px;line-height:1.5;">Specialized EVS cleaning protocols</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:18px 20px;">
+      <div style="font-size:18px;margin-bottom:8px;">🏭</div>
+      <div style="color:white;font-weight:600;font-size:13px;margin-bottom:4px;">Manufacturing</div>
+      <div style="color:rgba(255,255,255,0.5);font-size:12px;line-height:1.5;">Plants, production floors &amp; more</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:18px 20px;">
+      <div style="font-size:18px;margin-bottom:8px;">🚛</div>
+      <div style="color:white;font-weight:600;font-size:13px;margin-bottom:4px;">Trucking &amp; Logistics</div>
+      <div style="color:rgba(255,255,255,0.5);font-size:12px;line-height:1.5;">Facilities, warehouses &amp; yards</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:18px 20px;">
+      <div style="font-size:18px;margin-bottom:8px;">➕</div>
+      <div style="color:white;font-weight:600;font-size:13px;margin-bottom:4px;">And Much More</div>
+      <div style="color:rgba(255,255,255,0.5);font-size:12px;line-height:1.5;">Schools, gyms, retail, restaurants &amp; beyond</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual">
+    <div class="about-card">
+      <div class="about-quote">
+        "We Clean With Love."
+      </div>
+      <div class="about-attr">— Jackie Scott, Founder &amp; Owner</div>
+    </div>
+  </div>
+  <div class="about-content">
+    <div class="section-eyebrow">About Us</div>
+    <h2 class="section-title">Family-Owned.<br/>Community-Driven.</h2>
+    <div class="about-accent"></div>
+    <p class="about-text">
+      Just Clean It, LLC was founded in 2003 by Jackie Scott and has grown into a trusted commercial and residential property cleaning company serving the Durham and RTP area of North Carolina.
+    </p>
+    <p class="about-text">
+      Rebranded in 2025, we serve a wide range of accounts — from behavioral health facilities and offices to luxury apartment community common areas and vacant unit turnovers. We don't just clean spaces, we maintain the standard that properties and businesses depend on.
+    </p>
+    <ul class="values-list">
+      <li>Professionalism in every engagement</li>
+      <li>Reliable, trained independent contractors</li>
+      <li>Tailored service plans for every client</li>
+      <li>Care and integrity at our core</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-eyebrow">What We Do</div>
+      <h2 class="section-title">Our Services</h2>
+    </div>
+    <a href="#contact" class="btn-primary">Request Service</a>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🏢</div>
+      <div class="service-name">Commercial Cleaning</div>
+      <p class="service-desc">Professional cleaning services for offices, corporate spaces, and commercial facilities — tailored to your schedule and scope.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏥</div>
+      <div class="service-name">Behavioral Health &amp; Medical</div>
+      <p class="service-desc">Specialized EVS cleaning protocols for behavioral health facilities, medical offices, and sensitive environments requiring careful handling.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏙️</div>
+      <div class="service-name">Apartment Community Common Areas</div>
+      <p class="service-desc">Common area cleaning for mid-rise and high-rise residential properties — lobbies, hallways, pool lounges, gyms, elevators, stairwells, community rooms, leasing offices, meeting rooms, and restrooms.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✨</div>
+      <div class="service-name">Move-In / Move-Out Cleaning</div>
+      <p class="service-desc">Thorough unit turnovers and deep cleans for move-ins and move-outs — ensuring every space is pristine and ready for its next resident.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔄</div>
+      <div class="service-name">Floor Care</div>
+      <p class="service-desc">Sweeping, mopping, waxing, buffing, and carpet extraction — complete floor care solutions for any facility type.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🧹</div>
+      <div class="service-name">Janitorial Staffing</div>
+      <p class="service-desc">Flexible janitorial contractor placement for businesses needing reliable, trained cleaning professionals on an ongoing basis.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTRACT OPPORTUNITIES -->
+<section id="opportunities">
+  <div class="opp-layout">
+    <div class="opp-info">
+      <div class="section-eyebrow">Join Our Team</div>
+      <h2 class="section-title">Contract<br/>Opportunities</h2>
+      <p style="font-size:15px;line-height:1.8;color:var(--gray);margin-bottom:28px;">
+        We work exclusively with independent contractors (1099). If you're a self-motivated cleaning professional with experience in luxury apartment communities, commercial facilities, or behavioral health environments — we want to hear from you.
+      </p>
+      <h3>What to Expect</h3>
+      <p>Long-term contract placements at commercial and residential accounts across the Durham/RTP area. Compensation is based on full scope completion.</p>
+      <h3>Requirements</h3>
+      <ul>
+        <li>Valid government-issued ID</li>
+        <li>Background check required</li>
+        <li>Drug screening required</li>
+        <li>Reliable transportation</li>
+        <li>Professional attitude &amp; reliability</li>
+        <li>Direct deposit (ACH) for payment</li>
+      </ul>
+      <h3>Pay Structure</h3>
+      <p>Contractors are compensated on a flat monthly or per-visit rate. Pay schedules vary by contract (weekly, bi-weekly, or monthly).</p>
+    </div>
+
+    <div class="opp-form-wrap">
+      <div class="form-title">Apply for a Contract</div>
+      <div class="form-sub">Fill out the form below and we'll be in touch about available opportunities.</div>
+
+      <form id="applyForm" action="https://formspree.io/f/yourformid" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name="first_name" placeholder="Jackie" required/>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" name="last_name" placeholder="Scott" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="you@email.com" required/>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" name="phone" placeholder="(919) 000-0000"/>
+        </div>
+        <div class="form-group">
+          <label>City / Area</label>
+          <input type="text" name="city" placeholder="Durham, Raleigh, Morrisville..."/>
+        </div>
+        <div class="form-group">
+          <label>Facility Types You Can Service</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item"><input type="checkbox" name="facility[]" value="Office/Corporate"/> Office / Corporate</label>
+            <label class="checkbox-item"><input type="checkbox" name="facility[]" value="Medical/Healthcare"/> Medical / Healthcare</label>
+            <label class="checkbox-item"><input type="checkbox" name="facility[]" value="Behavioral Health"/> Behavioral Health</label>
+            <label class="checkbox-item"><input type="checkbox" name="facility[]" value="Manufacturing"/> Manufacturing</label>
+            <label class="checkbox-item"><input type="checkbox" name="facility[]" value="Restaurant"/> Restaurant</label>
+            <label class="checkbox-item"><input type="checkbox" name="facility[]" value="Residential"/> Residential</label>
+            <label class="checkbox-item"><input type="checkbox" name="facility[]" value="School"/> School</label>
+            <label class="checkbox-item"><input type="checkbox" name="facility[]" value="Gym/Fitness"/> Gym / Fitness</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Years of Cleaning Experience</label>
+          <select name="experience">
+            <option value="">Select...</option>
+            <option>Less than 1 year</option>
+            <option>1–2 years</option>
+            <option>3–5 years</option>
+            <option>5+ years</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell Us About Yourself</label>
+          <textarea name="message" placeholder="Any relevant experience, availability, or questions..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Submit Application</button>
+        <div class="form-note">
+          By submitting you agree to be contacted by Just Clean It, LLC regarding contract opportunities. All contractors are engaged as 1099 independent contractors.
+        </div>
+        <div class="success-msg" id="applySuccess">
+          ✓ Application received! We'll be in touch soon.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-layout">
+    <div>
+      <div class="section-eyebrow">Get In Touch</div>
+      <h2 class="section-title">Let's Talk<br/>About Your Space.</h2>
+      <p class="section-sub">Whether you're a potential client or a contractor, we'd love to connect. Reach out and someone from our team will get back to you promptly.</p>
+
+      <div class="contact-info-block">
+        <h4>Location</h4>
+        <p>Durham / RTP Area<br/>North Carolina</p>
+      </div>
+      <div class="contact-info-block">
+        <h4>Service Area</h4>
+        <p>Durham, Raleigh, Morrisville,<br/>Sanford &amp; surrounding RTP area</p>
+      </div>
+      <div class="contact-info-block">
+        <h4>Business Hours</h4>
+        <p>Monday – Friday: 9AM – 5PM<br/>Available by appointment</p>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap">
+      <form id="contactForm" action="https://formspree.io/f/yourformid" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Your name" required/>
+          </div>
+          <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" name="phone" placeholder="(919) 000-0000"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="you@email.com" required/>
+        </div>
+        <div class="form-group">
+          <label>I Am A...</label>
+          <select name="inquiry_type">
+            <option value="">Select...</option>
+            <option>Potential Client — Commercial</option>
+            <option>Potential Client — Residential</option>
+            <option>Independent Contractor</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea name="message" placeholder="Tell us about your cleaning needs or inquiry..." required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+        <div class="success-msg" id="contactSuccess">
+          ✓ Message sent! We'll get back to you soon.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Just Clean It, LLC &nbsp;·&nbsp; Durham / RTP Area, NC &nbsp;·&nbsp; <span>"We Clean With Love"</span> — Jackie Scott, Founder</p>
+</footer>
+
+<script>
+  // Smooth active nav highlighting
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--forest)' : '';
+    });
+  });
+
+  // Form feedback (works without formspree too — just shows success message)
+  ['applyForm', 'contactForm'].forEach(id => {
+    const form = document.getElementById(id);
+    if (!form) return;
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const successId = id === 'applyForm' ? 'applySuccess' : 'contactSuccess';
+      document.getElementById(successId).style.display = 'block';
+      form.reset();
+    });
+  });
+</script>
+</body>
+</html>
