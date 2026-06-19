@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Contractor Portal — Just Clean It, LLC</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --forest: #1A3D24; --sage: #2E6B42; --mint: #4CAF72; --ink: #0F1F14;
+  --mist: #F2F7F3; --rule: #D4E4D8; --white: #ffffff; --gray: #6B7C6B;
+  --light: #EEF5F0; --ghost: #F8FBF8; --error: #b91c1c;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; color: var(--ink); background: var(--white); overflow-x: hidden; }
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; height: 80px;
+  background: rgba(255,255,255,0.97);
+  border-bottom: 1px solid var(--rule);
+  backdrop-filter: blur(8px);
+}
+.nav-logo img { height: 58px; display: block; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  text-decoration: none; font-size: 13px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--forest); }
+.nav-cta { background: var(--forest); color: var(--white) !important; padding: 10px 22px; border-radius: 4px; transition: background 0.2s !important; }
+.nav-cta:hover { background: var(--sage) !important; }
+.nav-portal { border: 1.5px solid var(--forest); color: var(--forest) !important; padding: 8px 18px; border-radius: 4px; transition: all 0.2s !important; }
+.nav-portal:hover { background: var(--forest); color: var(--white) !important; }
+.nav-toggle { display: none; }
+.nav-burger { display: none; font-size: 24px; cursor: pointer; color: var(--forest); }
+.page { padding-top: 80px; min-height: 100vh; background: var(--mist); display: flex; align-items: center; justify-content: center; padding-bottom: 60px; }
+footer { background: var(--ink); color: rgba(255,255,255,0.5); text-align: center; padding: 28px 8%; font-size: 12px; letter-spacing: 0.05em; border-top: 3px solid var(--mint); }
+footer span { color: var(--mint); white-space: nowrap; }
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+.form-group label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--forest); }
+.form-group input {
+  padding: 12px 14px; border: 1.5px solid var(--rule); border-radius: 4px;
+  font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink);
+  background: var(--white); transition: border-color 0.2s; outline: none; width: 100%;
+}
+.form-group input:focus { border-color: var(--sage); }
+.submit-btn {
+  width: 100%; background: var(--forest); color: var(--white); border: none;
+  padding: 14px; border-radius: 4px; font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  cursor: pointer; margin-top: 8px; transition: background 0.2s, transform 0.15s;
+}
+.submit-btn:hover { background: var(--sage); transform: translateY(-1px); }
+.error-msg { display: none; font-size: 13px; color: var(--error); margin-top: 8px; background: #fef2f2; border: 1px solid #fecaca; border-radius: 4px; padding: 10px 14px; }
+.error-msg.show { display: block; }
+@media (max-width: 768px) {
+  .nav-burger { display: block; }
+  .nav-links { display: none; flex-direction: column; position: absolute; top: 80px; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--rule); padding: 20px 5%; gap: 20px; }
+  .nav-toggle:checked ~ .nav-links { display: flex; }
+  .login-card { padding: 36px 24px !important; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo"><img src="logo.png" alt="Just Clean It LLC"/></a>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle"/>
+  <label for="nav-toggle" class="nav-burger">&#9776;</label>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="services.html">What We Clean</a></li>
+    <li><a href="contractors.html">Contractors</a></li>
+    <li><a href="jobs.html">Job Board</a></li>
+    <li><a href="quote.html">Request a Quote</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+    <li><a href="contractor-login.html" class="nav-portal active">Portal</a></li>
+  </ul>
+</nav>
+
+<div class="page">
+  <div style="width:100%;max-width:460px;margin:40px 20px;">
+
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:36px;">
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--mint);margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:10px;">
+        <span style="display:block;width:24px;height:2px;background:var(--mint);"></span>Team Access<span style="display:block;width:24px;height:2px;background:var(--mint);"></span>
+      </div>
+      <h1 style="font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,38px);color:var(--forest);line-height:1.15;margin-bottom:10px;">Contractor Portal</h1>
+      <p style="font-size:14px;color:var(--gray);line-height:1.7;">Just Clean It, LLC &nbsp;·&nbsp; Durham / RTP Area, NC</p>
+    </div>
+
+    <!-- Card -->
+    <div class="login-card" style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:44px 40px;box-shadow:0 4px 24px rgba(26,61,36,0.07);">
+      <div class="form-group">
+        <label for="loginEmail">Email Address</label>
+        <input type="email" id="loginEmail" placeholder="you@email.com" autocomplete="email"/>
+      </div>
+      <div class="form-group">
+        <label for="loginPw">Access Code</label>
+        <input type="password" id="loginPw" placeholder="Enter your access code" autocomplete="current-password"/>
+      </div>
+      <div class="error-msg" id="loginErr">This email is not on the approved list, or your access code is incorrect. Contact j.justcleaning@gmail.com for access.</div>
+      <button class="submit-btn" onclick="checkLogin()">Sign In</button>
+    </div>
+
+    <!-- Footer note -->
+    <p style="text-align:center;font-size:12px;color:var(--gray);margin-top:20px;line-height:1.7;">
+      Access code provided by your coordinator.<br/>
+      Questions? <a href="mailto:j.justcleaning@gmail.com" style="color:var(--forest);font-weight:600;text-decoration:none;">j.justcleaning@gmail.com</a>
+      &nbsp;·&nbsp; <a href="tel:9192367327" style="color:var(--forest);font-weight:600;text-decoration:none;">(919) 236-7327</a>
+    </p>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Just Clean It, LLC &nbsp;·&nbsp; Durham / RTP Area, NC &nbsp;·&nbsp; <span>"We Clean With Love"</span> — Jackie Scott, Founder</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+const SUPABASE_URL = 'https://recnrvktdfjaowllqslo.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlY25ydmt0ZGZqYW93bGxxc2xvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4MTQ3NTksImV4cCI6MjA5NzM5MDc1OX0.lffTJLkZFnn1AMZ-L__IcRqLEaO70VrWuwdjFSbjtR4';
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+async function checkLogin() {
+  const approvedEmails = [
+    "mcneilldonisha@gmail.com",
+    "alyssadaniellewilliams@gmail.com",
+    "brittanyuwinstead@gmail.com",
+    "tdianne45@gmail.com",
+    "dspaintraining@yahoo.com",
+    "justcleaningrep@gmail.com",
+    "j.justcleaning@gmail.com",
+    "kimbrownnc@gmail.com",
+    "marcuswellsnc@gmail.com",
+    "pavonmarie291093@gmail.com",
+    "startinglegendsllc@icloud.com"
+  ];
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pw    = document.getElementById('loginPw').value;
+  const err   = document.getElementById('loginErr');
+  const btn   = document.querySelector('.submit-btn');
+
+  if (!email || pw !== "JCI$2025-7102025" || !approvedEmails.includes(email)) {
+    err.classList.add('show');
+    return;
+  }
+
+  btn.textContent = 'Signing in...';
+  btn.disabled = true;
+
+  // Check if this contractor already has a record; if not, create one
+  try {
+    const { data: existing } = await supabaseClient
+      .from('contractors')
+      .select('email')
+      .eq('email', email)
+      .maybeSingle();
+
+    if (!existing) {
+      await supabaseClient.from('contractors').insert([{ email: email }]);
+    }
+  } catch (e) {
+    // Even if the database check fails, let them through — don't block login
+    console.error('Database check failed:', e);
+  }
+
+  sessionStorage.setItem('jci_auth', 'true');
+  sessionStorage.setItem('jci_email', email);
+  window.location.href = 'contractor-welcome.html';
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') checkLogin();
+  document.getElementById('loginErr').classList.remove('show');
+});
+</script>
+</body>
+</html>
