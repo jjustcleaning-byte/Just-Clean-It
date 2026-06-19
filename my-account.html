@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>My Account — Just Clean It, LLC</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --forest: #1A3D24; --sage: #2E6B42; --mint: #4CAF72; --ink: #0F1F14;
+  --mist: #F2F7F3; --rule: #D4E4D8; --white: #ffffff; --gray: #6B7C6B;
+  --light: #EEF5F0; --ghost: #F8FBF8; --error: #b91c1c;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; color: var(--ink); background: var(--mist); overflow-x: hidden; }
+
+nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; height: 80px;
+  background: rgba(255,255,255,0.97);
+  border-bottom: 1px solid var(--rule);
+  backdrop-filter: blur(8px);
+}
+.nav-logo img { height: 58px; display: block; }
+.nav-links { display: flex; gap: 24px; list-style: none; align-items: center; }
+.nav-links a {
+  text-decoration: none; font-size: 13px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--forest); }
+.nav-back {
+  border: 1.5px solid var(--forest); color: var(--forest) !important;
+  padding: 8px 18px; border-radius: 4px; transition: all 0.2s !important;
+}
+.nav-back:hover { background: var(--forest); color: var(--white) !important; }
+.nav-toggle { display: none; }
+.nav-burger { display: none; font-size: 24px; cursor: pointer; color: var(--forest); }
+
+.main { max-width: 760px; margin: 0 auto; padding: 44px 5% 80px; }
+
+.page-header { text-align: center; margin-bottom: 36px; }
+.page-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--mint); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.page-eyebrow span { display: block; width: 24px; height: 2px; background: var(--mint); }
+.page-header h1 { font-family: 'DM Serif Display', serif; font-size: clamp(28px,4vw,38px); color: var(--forest); margin-bottom: 8px; }
+.page-header p { font-size: 14px; color: var(--gray); }
+
+.loading-box { text-align: center; padding: 60px 20px; }
+.loading-box p { font-size: 14px; color: var(--gray); margin-top: 16px; }
+.spinner {
+  width: 32px; height: 32px; border: 3px solid var(--rule); border-top-color: var(--forest);
+  border-radius: 50%; margin: 0 auto; animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.card { background: var(--white); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; margin-bottom: 20px; border-top: 3px solid var(--mint); display: none; }
+.card.show { display: block; }
+.card-head { padding: 24px 28px 18px; border-bottom: 1px solid var(--rule); }
+.card-head h2 { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--forest); margin-bottom: 4px; }
+.card-head p { font-size: 13px; color: var(--gray); line-height: 1.6; }
+.card-body { padding: 28px; }
+
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+.form-group label { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--forest); }
+.form-group input, .form-group select { padding: 12px 14px; border: 1.5px solid var(--rule); border-radius: 4px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink); background: var(--white); transition: border-color 0.2s; outline: none; width: 100%; }
+.form-group input:focus, .form-group select:focus { border-color: var(--sage); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+.section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mint); margin: 24px 0 14px; display: flex; align-items: center; gap: 10px; }
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+.section-label:first-child { margin-top: 0; }
+
+.status-row { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: var(--mist); border-radius: 4px; font-size: 13px; margin-bottom: 12px; }
+.status-row.signed { color: var(--forest); }
+.status-row.unsigned { color: var(--gray); }
+
+.save-bar {
+  display: flex; justify-content: flex-end; align-items: center; gap: 14px;
+  margin-top: 8px;
+}
+.save-msg { font-size: 13px; color: var(--mint); font-weight: 600; display: none; }
+.save-msg.show { display: inline; }
+.save-btn {
+  background: var(--forest); color: var(--white); border: none;
+  padding: 13px 28px; border-radius: 4px; font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  cursor: pointer; transition: background 0.2s;
+}
+.save-btn:hover { background: var(--sage); }
+.save-btn:disabled { opacity: 0.6; cursor: default; }
+
+.error-banner {
+  background: #fef2f2; border: 1px solid #fecaca; color: var(--error);
+  border-radius: 4px; padding: 12px 16px; font-size: 13px; margin-bottom: 18px; display: none;
+}
+.error-banner.show { display: block; }
+
+.last-updated { font-size: 12px; color: var(--gray); text-align: center; margin-top: 24px; }
+
+footer { background: var(--ink); color: rgba(255,255,255,0.5); text-align: center; padding: 28px 8%; font-size: 12px; letter-spacing: 0.05em; border-top: 3px solid var(--mint); }
+footer span { color: var(--mint); }
+
+@media (max-width: 768px) {
+  nav { padding: 0 4%; height: 64px; }
+  .nav-logo img { height: 42px; }
+  .nav-back { font-size: 11px; padding: 7px 14px; }
+  .form-row, .form-row-3 { grid-template-columns: 1fr; }
+  .card-body { padding: 20px; }
+  .card-head { padding: 18px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="logo.png" alt="Just Clean It LLC"/></a>
+  <ul class="nav-links">
+    <li><a href="contractor-welcome.html" class="nav-back">← Back to Portal</a></li>
+  </ul>
+</nav>
+
+<div class="main">
+
+  <div class="page-header">
+    <div class="page-eyebrow"><span></span>Your Information<span></span></div>
+    <h1>My Account</h1>
+    <p id="accountEmail">Loading...</p>
+  </div>
+
+  <div class="error-banner" id="loadError">We couldn't load your saved information. Please refresh the page or contact j.justcleaning@gmail.com.</div>
+
+  <!-- LOADING STATE -->
+  <div class="loading-box" id="loadingBox">
+    <div class="spinner"></div>
+    <p>Loading your information...</p>
+  </div>
+
+  <!-- ACCOUNT CARD -->
+  <div class="card" id="accountCard">
+    <div class="card-head">
+      <h2>Contact &amp; Personal Information</h2>
+      <p>Update your address, phone number, or emergency contact. Changes save automatically when you click Save.</p>
+    </div>
+    <div class="card-body">
+
+      <div class="section-label">Personal Details</div>
+      <div class="form-group"><label>Full Legal Name</label><input type="text" id="fullName" placeholder="As it appears on your ID"/></div>
+      <div class="form-group"><label>Street Address</label><input type="text" id="address" placeholder="123 Main Street"/></div>
+      <div class="form-row-3">
+        <div class="form-group"><label>City</label><input type="text" id="city" placeholder="Durham"/></div>
+        <div class="form-group"><label>State</label><input type="text" id="state" placeholder="NC" maxlength="2"/></div>
+        <div class="form-group"><label>ZIP</label><input type="text" id="zip" placeholder="27701" maxlength="10"/></div>
+      </div>
+      <div class="form-group"><label>Phone Number</label><input type="tel" id="phone" placeholder="(919) 555-0100"/></div>
+
+      <div class="section-label">Emergency Contact</div>
+      <div class="form-row">
+        <div class="form-group"><label>Contact Name</label><input type="text" id="ecName" placeholder="Full name"/></div>
+        <div class="form-group"><label>Relationship</label><input type="text" id="ecRel" placeholder="e.g., Spouse, Parent"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Emergency Phone</label><input type="tel" id="ecPhone" placeholder="(919) 555-0200"/></div>
+        <div class="form-group"><label>Alternate Phone</label><input type="tel" id="ecAlt" placeholder="Optional"/></div>
+      </div>
+
+      <div class="save-bar">
+        <span class="save-msg" id="saveMsg1">✓ Saved</span>
+        <button class="save-btn" id="saveBtn1" onclick="saveSection('personal')">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANKING CARD -->
+  <div class="card" id="bankingCard">
+    <div class="card-head">
+      <h2>ACH / Direct Deposit</h2>
+      <p>Update your banking information for payroll. This is used exclusively for direct deposit.</p>
+    </div>
+    <div class="card-body">
+      <div class="form-group"><label>Bank / Financial Institution</label><input type="text" id="bankName" placeholder="e.g., Wells Fargo, Cash App (Sutton Bank)"/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Account Holder Name</label><input type="text" id="acctHolder" placeholder="Name on the account"/></div>
+        <div class="form-group"><label>Account Type</label><select id="acctType"><option value="">Select type...</option><option>Checking</option><option>Savings</option></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Routing Number</label><input type="text" id="routingNum" placeholder="9-digit routing number" maxlength="9"/></div>
+        <div class="form-group"><label>Account Number</label><input type="text" id="acctNum" placeholder="Your account number"/></div>
+      </div>
+      <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:4px;padding:12px 16px;font-size:13px;color:#92400e;margin-top:6px;">
+        🔒 Your banking information is private and used exclusively for payroll direct deposit.
+      </div>
+
+      <div class="save-bar">
+        <span class="save-msg" id="saveMsg2">✓ Saved</span>
+        <button class="save-btn" id="saveBtn2" onclick="saveSection('banking')">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AGREEMENTS STATUS CARD -->
+  <div class="card" id="statusCard">
+    <div class="card-head">
+      <h2>Onboarding Status</h2>
+      <p>A summary of your signed agreements on file.</p>
+    </div>
+    <div class="card-body">
+      <div class="status-row" id="ncStatus">Non-Compete Agreement: Loading...</div>
+      <div class="status-row" id="confStatus">Confidentiality Agreement: Loading...</div>
+      <p style="font-size:13px;color:var(--gray);margin-top:14px;">
+        Need to (re)sign an agreement? Visit the <a href="contractor-packet.html" style="color:var(--forest);font-weight:600;text-decoration:none;">Welcome Packet</a>.
+      </p>
+    </div>
+  </div>
+
+  <p class="last-updated" id="lastUpdated"></p>
+
+</div>
+
+<footer>
+  <p>© 2026 Just Clean It, LLC &nbsp;·&nbsp; Durham / RTP Area, NC &nbsp;·&nbsp; <span>"We Clean With Love"</span> — Jackie Scott, Founder</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+const SUPABASE_URL = 'https://recnrvktdfjaowllqslo.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJlY25ydmt0ZGZqYW93bGxxc2xvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4MTQ3NTksImV4cCI6MjA5NzM5MDc1OX0.lffTJLkZFnn1AMZ-L__IcRqLEaO70VrWuwdjFSbjtR4';
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// Auth guard
+if (!sessionStorage.getItem('jci_auth')) {
+  window.location.href = 'contractor-login.html';
+}
+
+const userEmail = sessionStorage.getItem('jci_email');
+
+async function loadAccount() {
+  document.getElementById('accountEmail').textContent = userEmail;
+
+  try {
+    const { data, error } = await supabaseClient
+      .from('contractors')
+      .select('*')
+      .eq('email', userEmail)
+      .maybeSingle();
+
+    if (error) throw error;
+
+    document.getElementById('loadingBox').style.display = 'none';
+    document.getElementById('accountCard').classList.add('show');
+    document.getElementById('bankingCard').classList.add('show');
+    document.getElementById('statusCard').classList.add('show');
+
+    if (data) {
+      document.getElementById('fullName').value   = data.full_name || '';
+      document.getElementById('address').value    = data.address || '';
+      document.getElementById('city').value       = data.city || '';
+      document.getElementById('state').value      = data.state || '';
+      document.getElementById('zip').value        = data.zip || '';
+      document.getElementById('phone').value      = data.phone || '';
+      document.getElementById('ecName').value     = data.emergency_name || '';
+      document.getElementById('ecRel').value      = data.emergency_relationship || '';
+      document.getElementById('ecPhone').value    = data.emergency_phone || '';
+      document.getElementById('ecAlt').value      = data.emergency_alt_phone || '';
+      document.getElementById('bankName').value   = data.bank_name || '';
+      document.getElementById('acctHolder').value = data.account_holder || '';
+      document.getElementById('acctType').value   = data.account_type || '';
+      document.getElementById('routingNum').value = data.routing_number || '';
+      document.getElementById('acctNum').value    = data.account_number || '';
+
+      const ncRow = document.getElementById('ncStatus');
+      if (data.noncompete_signed) {
+        ncRow.innerHTML = '✅ Non-Compete Agreement: Signed' + (data.noncompete_signed_date ? ' on ' + data.noncompete_signed_date : '');
+        ncRow.classList.add('signed');
+      } else {
+        ncRow.innerHTML = '⚠️ Non-Compete Agreement: Not yet signed';
+        ncRow.classList.add('unsigned');
+      }
+
+      const confRow = document.getElementById('confStatus');
+      if (data.confidentiality_signed) {
+        confRow.innerHTML = '✅ Confidentiality Agreement: Signed' + (data.confidentiality_signed_date ? ' on ' + data.confidentiality_signed_date : '');
+        confRow.classList.add('signed');
+      } else {
+        confRow.innerHTML = '⚠️ Confidentiality Agreement: Not yet signed';
+        confRow.classList.add('unsigned');
+      }
+
+      if (data.updated_at) {
+        const d = new Date(data.updated_at);
+        document.getElementById('lastUpdated').textContent = 'Last updated: ' + d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+      }
+    } else {
+      document.getElementById('ncStatus').innerHTML = '⚠️ Non-Compete Agreement: Not yet signed';
+      document.getElementById('confStatus').innerHTML = '⚠️ Confidentiality Agreement: Not yet signed';
+    }
+
+  } catch (e) {
+    console.error(e);
+    document.getElementById('loadingBox').style.display = 'none';
+    document.getElementById('loadError').classList.add('show');
+  }
+}
+
+async function saveSection(section) {
+  const btnId = section === 'personal' ? 'saveBtn1' : 'saveBtn2';
+  const msgId = section === 'personal' ? 'saveMsg1' : 'saveMsg2';
+  const btn = document.getElementById(btnId);
+  const msg = document.getElementById(msgId);
+
+  btn.textContent = 'Saving...';
+  btn.disabled = true;
+  msg.classList.remove('show');
+
+  let updates = { updated_at: new Date().toISOString() };
+
+  if (section === 'personal') {
+    updates = {
+      ...updates,
+      full_name: document.getElementById('fullName').value,
+      address: document.getElementById('address').value,
+      city: document.getElementById('city').value,
+      state: document.getElementById('state').value,
+      zip: document.getElementById('zip').value,
+      phone: document.getElementById('phone').value,
+      emergency_name: document.getElementById('ecName').value,
+      emergency_relationship: document.getElementById('ecRel').value,
+      emergency_phone: document.getElementById('ecPhone').value,
+      emergency_alt_phone: document.getElementById('ecAlt').value,
+    };
+  } else {
+    updates = {
+      ...updates,
+      bank_name: document.getElementById('bankName').value,
+      account_holder: document.getElementById('acctHolder').value,
+      account_type: document.getElementById('acctType').value,
+      routing_number: document.getElementById('routingNum').value,
+      account_number: document.getElementById('acctNum').value,
+    };
+  }
+
+  try {
+    const { error } = await supabaseClient
+      .from('contractors')
+      .update(updates)
+      .eq('email', userEmail);
+
+    if (error) throw error;
+
+    btn.textContent = 'Save Changes';
+    btn.disabled = false;
+    msg.classList.add('show');
+    setTimeout(() => msg.classList.remove('show'), 3000);
+
+    // Notify office of the update via Web3Forms
+    notifyUpdate(section, updates);
+
+  } catch (e) {
+    console.error(e);
+    btn.textContent = 'Save Changes';
+    btn.disabled = false;
+    alert('There was a problem saving your changes. Please try again or contact j.justcleaning@gmail.com.');
+  }
+}
+
+async function notifyUpdate(section, updates) {
+  try {
+    await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        access_key: '63c3c1e0-e58b-4636-b0b8-326b3b2ccb4d',
+        subject: 'Contractor Info Update — ' + userEmail,
+        from_name: 'JCI Contractor Portal',
+        'Contractor Email': userEmail,
+        'Section Updated': section === 'personal' ? 'Contact & Personal Information' : 'ACH / Direct Deposit',
+        ...updates
+      })
+    });
+  } catch (e) {
+    console.error('Notification email failed (non-blocking):', e);
+  }
+}
+
+loadAccount();
+</script>
+</body>
+</html>
